@@ -25,7 +25,8 @@ namespace DOTNET_IBE_1.Services
         {
             int skip = 0;
             int take = 1000;
-            string query = GraphQLQueries.minimumNightlyRateQuery.Replace("{0}", take.ToString()).Replace("{1}", skip.ToString());
+            string query = 
+                GraphQLQueries.minimumNightlyRateQuery.Replace("{take}", take.ToString()).Replace("{skip}", skip.ToString());
             
             if (string.IsNullOrEmpty(query))
             {
@@ -33,7 +34,8 @@ namespace DOTNET_IBE_1.Services
             }
 
             GraphQlResponseModel<MinimumNightlyRateResponse> response 
-                = await _graphQLClientService.SendQueryAsync<GraphQlResponseModel<MinimumNightlyRateResponse>>(query); 
+                = await _graphQLClientService
+                .SendQueryAsync<GraphQlResponseModel<MinimumNightlyRateResponse>>(query); 
 
             if(response==null)
             {

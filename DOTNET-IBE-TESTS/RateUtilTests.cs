@@ -7,8 +7,29 @@ namespace DOTNET_IBE_TESTS
 {
     public class RateUtilTests
     {
+        [Theory]
+        [MemberData(nameof(GetSampleDataForGetDateToRateMappingFromRoomTypesListMethod))]
+        public void GetDateToRateMappingFromRoomTypesList_ShouldReturnCorrectDictionary(List<MinimumNightlyRateRoomType> roomTypesList, Dictionary<string, double> expectedDictionary)
+        {
+            // Act
+            var actualDictionary = RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList);
+            // Assert
+            Assert.Equal(expectedDictionary, actualDictionary);
+        }
+
         [Fact]
-        public void GetDateToRateMappingFromRoomTypesList_ShouldReturnCorrectDictionary()
+        public void GetDateToRateMappingFromRoomTypesList_ShouldThrowException_WhenRoomTypesListIsNull()
+        {
+            // Arrange
+            List<MinimumNightlyRateRoomType> roomTypesList = null;
+
+            // Act and Assert
+            Assert.Throws<InvalidRoomTypesListException>(() => RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList));
+        }
+
+
+
+        public static IEnumerable<object[]> GetSampleDataForGetDateToRateMappingFromRoomTypesListMethod()
         {
             //creating sample data by referencing graphql data 
             var roomTypesList = new List<MinimumNightlyRateRoomType>
@@ -65,21 +86,8 @@ namespace DOTNET_IBE_TESTS
                 {"2023-03-02T00:00:00.000Z", 110}
             };
 
-            // Act
-            var actualDictionary = RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList);
+            yield return new object[] { roomTypesList, expectedDictionary };
 
-            // Assert
-            Assert.Equal(expectedDictionary, actualDictionary);
-        }
-
-        [Fact]
-        public void GetDateToRateMappingFromRoomTypesList_ShouldThrowException_WhenRoomTypesListIsNull()
-        {
-            // Arrange
-            List<MinimumNightlyRateRoomType> roomTypesList = null;
-
-            // Act and Assert
-            Assert.Throws<InvalidRoomTypesListException>(() => RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList));
         }
 
     }

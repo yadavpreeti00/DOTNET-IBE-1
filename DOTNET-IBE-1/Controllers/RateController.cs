@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace DOTNET_IBE_1.Controllers
 {
     [ApiController]
-    public class RateController : Controller
+    [Route("/api")]
+    public class RateController : ControllerBase
     {
         private readonly IRateService _rateService;
         public RateController(IRateService rateService)
@@ -13,7 +14,7 @@ namespace DOTNET_IBE_1.Controllers
         }
 
         [HttpGet]
-        [Route("/Get/MinimumRates")]
+        [Route("/MinimumRates")]
         public async Task<IActionResult> GetMinimumRateForDay()
         {
             var response = await _rateService.GetMinimumRateDateMapping();
