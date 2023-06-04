@@ -10,7 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureServices(builder.Configuration);
+builder.Services
+    .ConfigureServices(builder.Configuration)
+    .ConfigureDatabaseConnection(builder.Configuration)
+    ;
 
 var app = builder.Build();
 
@@ -25,6 +28,8 @@ app.UseHttpsRedirection();
 
 //using middleware for exception handling
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseCors("AllowSpecificOrigins");
 
 
 app.UseAuthorization();

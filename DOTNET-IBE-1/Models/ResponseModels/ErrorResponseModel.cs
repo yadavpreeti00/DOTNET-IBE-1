@@ -1,4 +1,4 @@
-﻿namespace DOTNET_IBE_1.Models
+﻿namespace DOTNET_IBE_1.Models.ResponseModels
 {
     public class ErrorResponseModel
     {

@@ -5,11 +5,16 @@ using DOTNET_IBE_1.Utility;
 
 namespace DOTNET_IBE_TESTS
 {
+    /// <summary>
+    /// Tests for RateUtil static class
+    /// </summary>
     public class RateUtilTests
     {
+
         [Theory]
         [MemberData(nameof(GetSampleDataForGetDateToRateMappingFromRoomTypesListMethod))]
-        public void GetDateToRateMappingFromRoomTypesList_ShouldReturnCorrectDictionary(List<MinimumNightlyRateRoomType> roomTypesList, Dictionary<string, double> expectedDictionary)
+        public void GetDateToRateMappingFromRoomTypesListShouldReturnCorrectDictionary
+            (List<MinimumNightlyRateRoomType> roomTypesList, Dictionary<string, double> expectedDictionary)
         {
             // Act
             var actualDictionary = RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList);
@@ -18,17 +23,20 @@ namespace DOTNET_IBE_TESTS
         }
 
         [Fact]
-        public void GetDateToRateMappingFromRoomTypesList_ShouldThrowException_WhenRoomTypesListIsNull()
+        public void GetDateToRateMappingFromRoomTypesListShouldThrowExceptionWhenRoomTypesListIsNull()
         {
             // Arrange
             List<MinimumNightlyRateRoomType> roomTypesList = null;
 
             // Act and Assert
-            Assert.Throws<InvalidRoomTypesListException>(() => RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList));
+            Assert.Throws<NotFoundException>(() => RateUtil.GetDateToRateMappingFromRoomTypesList(roomTypesList));
         }
 
 
-
+        /// <summary>
+        /// Generate data for test
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetSampleDataForGetDateToRateMappingFromRoomTypesListMethod()
         {
             //creating sample data by referencing graphql data 

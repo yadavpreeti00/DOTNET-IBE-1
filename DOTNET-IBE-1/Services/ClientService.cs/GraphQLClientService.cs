@@ -6,7 +6,7 @@ using System.Text;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
-namespace DOTNET_IBE_1.Services
+namespace DOTNET_IBE_1.Services.ClientService.cs
 {
 
     public class GraphQLClientService
@@ -41,7 +41,7 @@ namespace DOTNET_IBE_1.Services
             response.EnsureSuccessStatusCode();
             var responseJson = await response.Content.ReadAsStringAsync();
             TResponse? result = JsonConvert.DeserializeObject<TResponse>(responseJson.ToString());
-            if(result==null)
+            if (result == null)
             {
                 throw new GraphQLException(ExceptionMessages.GRAPH_QL_FAILED);
             }
