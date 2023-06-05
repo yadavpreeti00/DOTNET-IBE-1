@@ -67,7 +67,10 @@ namespace DOTNET_IBE_1.Entities
             UpdatedAt = DateTime.Now;
             Vat = bookingRequest.Vat;
             Zip = bookingRequest.Zip;
-            UserId = null;
+            if(bookingRequest.UserId != null)
+            {
+                UserId = bookingRequest.UserId;
+            }
             CustomPromotionPromoCode = null;
         }
 

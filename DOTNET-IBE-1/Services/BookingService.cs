@@ -57,7 +57,19 @@ namespace DOTNET_IBE_1.Services
 
         public List<BookingDetail> GetBookingDetailsForUser(string userId)
         {
-            return _databaseOperationsService.GetBookingDetailsForUser(userId);
+            List<BookingDetail> bookingDetails = _databaseOperationsService
+                .GetBookingDetailsForUser(userId);
+
+            // Sorting the bookingDetails list by check-in date
+            bookingDetails.Sort((b1, b2) =>
+            {
+                DateTime checkInDate1 = DateUtil.ConvertToDate(b1.CheckInDate);
+                DateTime checkInDate2 = DateUtil.ConvertToDate(b2.CheckInDate);
+                return checkInDate2.CompareTo(checkInDate1);
+            });
+
+            return bookingDetails;
+
         }
 
         public BookingStatusResponseModel GetBookingStatus(string bookingId)

@@ -23,92 +23,41 @@ namespace DOTNET_IBE_1.Middlewares
             {
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ex.Message, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ex.Message, context.Request.Path, (int)HttpStatusCode.InternalServerError);
                 await context.Response.WriteAsync(jsonErrorResponse);
             }
             catch (GraphQLException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path,
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
                 await context.Response.WriteAsync(jsonErrorResponse);
             }
             catch (NotFoundException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, 
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
                 await context.Response.WriteAsync(jsonErrorResponse);
             }
             catch (CredentialsException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, 
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
                 await context.Response.WriteAsync(jsonErrorResponse);
 
             }
@@ -116,46 +65,22 @@ namespace DOTNET_IBE_1.Middlewares
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, 
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
                 await context.Response.WriteAsync(jsonErrorResponse);
             }
             catch (SQSException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, 
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
                 await context.Response.WriteAsync(jsonErrorResponse);
 
             }
@@ -163,31 +88,28 @@ namespace DOTNET_IBE_1.Middlewares
             {
                 context.Response.StatusCode = 500;
                 context.Response.ContentType = "application/json";
-                string jsonErrorResponse = GenerateErrorResponse(ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, (int)HttpStatusCode.InternalServerError);
-                if (string.IsNullOrEmpty(ex.Message))
-                {
-                    _logger.LogError(ExceptionMessages.UNKNOWN_EXCEPTION);
-                }
-                else
-                {
-                    _logger.LogError(ex.Message);
-                }
-                if (string.IsNullOrEmpty(ex.StackTrace))
-                {
-                    _logger.LogError(ExceptionMessages.STACKTRACE_UNAVAILABLE);
-                }
-                else
-                {
-                    _logger.LogError(ex.StackTrace);
-                }
+                string jsonErrorResponse = GenerateErrorResponse
+                    (ExceptionMessages.INTERNAL_SERVER_ERROR, context.Request.Path, 
+                    (int)HttpStatusCode.InternalServerError);
+                LogError(ex.Message, ExceptionMessages.UNKNOWN_EXCEPTION);
+                LogError(ex.StackTrace, ExceptionMessages.STACKTRACE_UNAVAILABLE);
+
+                
                 await context.Response.WriteAsync(jsonErrorResponse);
             }
         }
 
         private string GenerateErrorResponse(string message, string path, int statusCode)
         {
-            ErrorResponseModel errorResponse = new ErrorResponseModel(message, path, statusCode, DateTime.Now);
+            ErrorResponseModel errorResponse = 
+                new ErrorResponseModel(message, path, statusCode, DateTime.Now);
             return System.Text.Json.JsonSerializer.Serialize(errorResponse);
+        }
+
+        private void LogError(string errorMessage, string defaultErrorMessage)
+        {
+            string message = string.IsNullOrEmpty(errorMessage) ? defaultErrorMessage : errorMessage;
+            _logger.LogError(message);
         }
     }
 }

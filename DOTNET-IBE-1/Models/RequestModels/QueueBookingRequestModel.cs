@@ -7,6 +7,7 @@ namespace DOTNET_IBE_1.Models.RequestModels
     public class QueueBookingRequestModel
     {
 
+
         [JsonPropertyName("bookingId")]
         public string? BookingId { get; set; }
 
@@ -108,6 +109,9 @@ namespace DOTNET_IBE_1.Models.RequestModels
 
         [JsonPropertyName("room_count")]
         public string RoomCount { get; set; }
+
+        [JsonPropertyName("user_id")]
+        public string UserId { get; set; }
 
 
     }
