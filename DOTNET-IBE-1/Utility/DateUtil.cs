@@ -99,7 +99,12 @@ namespace DOTNET_IBE_1.Utility
         public static DateTime ConvertUTCStringToDate(string stringDate)
         {
             DateTime date;
-            bool success = DateTime.TryParseExact(stringDate,CommonConstants.UTC_DATE_STRING, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+            bool success = DateTime.TryParseExact(stringDate,CommonConstants.UTC_DATE_STRING_Z, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+            if(!success)
+            {
+                success = DateTime.TryParseExact(stringDate, CommonConstants.UTC_DATE_STRING, CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            }
             if (success)
             {
                 return date;

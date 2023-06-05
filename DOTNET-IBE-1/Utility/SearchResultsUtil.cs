@@ -16,16 +16,18 @@ namespace DOTNET_IBE_1.Utility
         /// <param name="roomCount"></param>
         /// <param name="availableRoomResult"></param>
         /// <exception cref="NotFoundException"></exception>
-        public static void FormAvailableRoomResultsResponse(Dictionary<string, double> roomRatesResult, 
-            SearchResultsQueryResponse response, long stayRange, int roomCount, 
+        public static void FormAvailableRoomResultsResponse(Dictionary<string, double> roomRatesResult,
+            SearchResultsQueryResponse response, long stayRange, int roomCount,
             List<AvailableRoomResponseModel> availableRoomResult)
         {
-            Dictionary<string, Dictionary<long, long>> roomTypeToRoomIds 
+
+            Dictionary<string, Dictionary<long, long>> roomTypeToRoomIds
                 = new Dictionary<string, Dictionary<long, long>>();
             List<SearchListRoomAvailabilitiesResponse> listRoomAvailabilities = response.ListRoomAvailabilities;
 
             foreach (SearchListRoomAvailabilitiesResponse availability in listRoomAvailabilities)
             {
+                
 
                 string roomTypeName = availability.Room.RoomType.RoomTypeName;
                 long roomId = availability.RoomId;
@@ -61,14 +63,14 @@ namespace DOTNET_IBE_1.Utility
                     SearchResultRoomType? roomType = response.ListRoomAvailabilities
                         .Select(availability => availability.Room.RoomType)
                         .FirstOrDefault(rt => rt.RoomTypeName == roomTypeName);
-                    if(roomType == null)
+                    if (roomType == null)
                     {
                         throw new NotFoundException(ExceptionMessages.SEARCH_RESULTS_ROOM_TYPE_NOT_FOUND);
                     }
 
                     double roomRate = roomRatesResult.GetValueOrDefault(roomTypeName, 0);
 
-                    AvailableRoomResponseModel roomModel = new AvailableRoomResponseModel( roomType,roomRate);
+                    AvailableRoomResponseModel roomModel = new AvailableRoomResponseModel(roomType, roomRate);
 
                     availableRoomResult.Add(roomModel);
                 }

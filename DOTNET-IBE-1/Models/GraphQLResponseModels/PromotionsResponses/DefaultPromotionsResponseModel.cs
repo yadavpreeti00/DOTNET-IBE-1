@@ -8,5 +8,9 @@
         {
             ListPromotions = listPromotions;
         }
+
+        public DefaultPromotionsResponseModel()
+        {
+        }
     }
 }

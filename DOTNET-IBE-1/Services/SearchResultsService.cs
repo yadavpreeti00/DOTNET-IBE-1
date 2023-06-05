@@ -56,7 +56,16 @@ namespace DOTNET_IBE_1.Services
             List<AvailableRoomResponseModel> availableRoomsResults = new List<AvailableRoomResponseModel>();
             SearchResultsUtil.FormAvailableRoomResultsResponse(roomRatesResult, searchResultsResponse.Data, 
                 stayRange, availableRoomRequestBody.RoomCount, availableRoomsResults);
-            
+
+            if(availableRoomRequestBody.SortType!=null)
+            {
+                FilterSortUtil.ApplySort(availableRoomRequestBody.SortType, availableRoomsResults);
+            }
+            if(availableRoomRequestBody.FilterTypes!=null)
+            {
+                FilterSortUtil.ApplyFilterOptions(availableRoomRequestBody.FilterTypes, availableRoomsResults);
+            }
+
             return availableRoomsResults;
         }
 

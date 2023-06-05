@@ -37,5 +37,9 @@ namespace DOTNET_IBE_1.Models.GraphQLResponseModels.PromotionsResponses
             PromotionId = customPromotion.PromotionId;
             PromotionTitle = customPromotion.PromotionTitle;
         }
+
+        public PromotionGraphQLResponseModel()
+        {
+        }
     }
 }
