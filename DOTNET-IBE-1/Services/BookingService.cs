@@ -19,6 +19,10 @@ namespace DOTNET_IBE_1.Services
             _databaseOperationsService = databaseOperationsService;
         }
 
+        public BookingService()
+        {
+        }
+
         public bool CreateBooking(string bookingRequestFromQueue)
         {
             QueueBookingRequestModel? bookingRequest = 

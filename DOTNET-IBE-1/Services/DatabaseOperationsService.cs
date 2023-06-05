@@ -15,6 +15,10 @@ namespace DOTNET_IBE_1.Services
             _team03Context = team03Context;
         }
 
+        public DatabaseOperationsService()
+        {
+        }
+
         public async Task<CustomPromotion> GetCustomPromotionByPromoCode(string promoCode)
         {
             CustomPromotion? customPromotion = await _team03Context.CustomPromotions
@@ -24,8 +28,8 @@ namespace DOTNET_IBE_1.Services
 
         public BookingStatusResponseModel GetBookingStatusFromBookingId(string bookingId)
         {
-            var bookingStatus = _team03Context.BookingStatuses
-                .FirstOrDefault(b => b.BookingId == bookingId);
+            BookingStatus? bookingStatus = _team03Context.BookingStatuses.Find(bookingId);
+
             if (bookingStatus == null)
             {
                 throw new NotFoundException(ExceptionMessages.BOOKING_STATUS_NOT_FOUND);
@@ -61,8 +65,8 @@ namespace DOTNET_IBE_1.Services
 
         public BookingDetailsResponseModel GetBookingDetailsFromBookingId(string bookingId)
         {
-            var bookingDetails = _team03Context.BookingDetails
-                .FirstOrDefault(b => b.BookingId == bookingId);
+            BookingDetail? bookingDetails = _team03Context.BookingDetails
+                .Find(bookingId);
             if (bookingDetails == null)
             {
                 throw new NotFoundException(ExceptionMessages.BOOKING_DETAILS_NOT_FOUND);
@@ -73,7 +77,7 @@ namespace DOTNET_IBE_1.Services
 
         public void CancelBookingFromBookingId(string bookingId)
         {
-            var bookingDetails = _team03Context.BookingDetails.FirstOrDefault(b => b.BookingId == bookingId);
+            BookingDetail? bookingDetails = _team03Context.BookingDetails.Find(bookingId);
             if (bookingDetails == null)
             {
                 throw new NotFoundException(ExceptionMessages.BOOKING_DETAILS_NOT_FOUND);
